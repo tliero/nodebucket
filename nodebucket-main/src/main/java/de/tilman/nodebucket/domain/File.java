@@ -1,4 +1,4 @@
-package de.tilman.nodebucket;
+package de.tilman.nodebucket.domain;
 
 public class File extends Node {
 	

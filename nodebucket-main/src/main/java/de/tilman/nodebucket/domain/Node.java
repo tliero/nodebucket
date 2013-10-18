@@ -1,4 +1,4 @@
-package de.tilman.nodebucket;
+package de.tilman.nodebucket.domain;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +23,7 @@ public abstract class Node {
 		}
 	}
 	
+	private long id;
 	private String title;
 	private MimeType mimeType;
 	private Visibility visibility;
@@ -31,8 +32,14 @@ public abstract class Node {
 	
 	
 	public Node(String title, MimeType mimeType) {
+		this.id = 0; // TODO create unique ID
+		
 		this.title = title; // TODO check if Node with this title already exists
 		this.mimeType = mimeType;
+	}
+	
+	public long getId() {
+		return id;
 	}
 
 	public String getTitle() {

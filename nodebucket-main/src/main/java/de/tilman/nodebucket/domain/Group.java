@@ -1,13 +1,20 @@
-package de.tilman.nodebucket;
+package de.tilman.nodebucket.domain;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class Group {
 
+	private long id;
 	private String name;
 	private User groupAdmin;
 	private Set<User> users = new HashSet<User>();
+
+	
+	
+	public long getId() {
+		return id;
+	}
 
 	public String getName() {
 		return name;

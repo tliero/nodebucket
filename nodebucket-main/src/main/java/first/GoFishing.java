@@ -6,7 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class GoFishing {
   public static void main(String[] args) {
-    ApplicationContext context = new ClassPathXmlApplicationContext("nodebucket.xml");
+    ApplicationContext context = new ClassPathXmlApplicationContext("fisher.xml");
     Fisher fisher = (Fisher) context.getBean("fisher");
     fisher.goFishing();
     
