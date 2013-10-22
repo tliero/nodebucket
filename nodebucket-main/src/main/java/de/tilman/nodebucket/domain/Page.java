@@ -13,9 +13,8 @@ public class Page extends Node {
 		return content;
 	}
 
-	@Override
-	public void setContent(byte[] content) {
-		this.content = new String(content);
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 }

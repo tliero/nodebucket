@@ -12,8 +12,7 @@ public class File extends Node {
 	public Object getContent() {
 		return content;
 	}
-
-	@Override
+	
 	public void setContent(byte[] content) {
 		this.content = content;
 	}

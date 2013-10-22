@@ -80,6 +80,4 @@ public abstract class Node {
 	
 	public abstract Object getContent();
 
-	public abstract void setContent(byte[] content);
-
 }
