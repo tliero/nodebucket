@@ -47,7 +47,7 @@ public abstract class Node {
 	
 	@OneToMany
 	@ElementCollection
-	@JoinColumn(name="backlink", referencedColumnName="id")
+	@JoinColumn(referencedColumnName="id", name="backlink")
 	private Set<Node> backlinks = new HashSet<Node>();
 	
 	

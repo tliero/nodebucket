@@ -1,21 +1,24 @@
 package de.tilman.nodebucket.domain;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CollectionTable;
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class UserGroup {
+public class UserGroup implements Serializable {
 
-    @Id
+	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	private String name;
@@ -24,9 +27,11 @@ public class UserGroup {
 	@JoinColumn(name="adminName")
 	private User groupAdmin;
 	
+	@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	@ElementCollection
-	@CollectionTable(joinColumns={@JoinColumn(referencedColumnName="name", name="userName")})
+	@JoinColumn(referencedColumnName="name", name="userName")
 	private Set<User> users = new HashSet<User>();
+//	@CollectionTable(joinColumns={@JoinColumn(referencedColumnName="name", name="userName")})
 
 	
 	protected UserGroup() {}
@@ -68,6 +73,14 @@ public class UserGroup {
 	
 	@Override
 	public String toString() {
-		return String.format("User[name='%s', admin='%s']", name, groupAdmin.getName());
+//		return String.format("User[name='%s', admin='%s']", name, groupAdmin.getName());
+		
+		StringBuffer userList = new StringBuffer();
+		for (User user : users) {
+			userList.append(user.getName());
+			userList.append(", ");
+		}
+		
+		return "User[name='" + name + "', admin='" + groupAdmin.getName() + "', members={" + userList + "}]";
 	}
 }
