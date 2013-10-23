@@ -1,19 +1,12 @@
 package de.tilman.nodebucket.domain;
 
-import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-// TODO
-//import javax.persistence.Entity;
-//import javax.persistence.Table;
-//import javax.xml.bind.annotation.XmlRootElement;
-//
-//@Entity
-//@Table(name="user")
-//@XmlRootElement
-public class User implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+@Entity
+public class User {
 	
+    @Id
 	private String name;
 	private String email;
 	private String passwordHash;

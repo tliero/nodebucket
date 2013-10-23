@@ -3,6 +3,19 @@ package de.tilman.nodebucket.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
+//@MappedSuperclass
+@Entity
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class Node {
 
 	public enum Visibility { PUBLIC, PRIVATE, GROUP };
@@ -23,11 +36,17 @@ public abstract class Node {
 		}
 	}
 	
+    @Id
+    @GeneratedValue(strategy=GenerationType.TABLE)
 	private long id;
 	private String title;
 	private MimeType mimeType;
 	private Visibility visibility;
-	private Set<String> tags = new HashSet<String>();
+	private HashSet<String> tags = new HashSet<String>();
+	
+	@OneToMany
+	@ElementCollection
+	@JoinColumn(name="backlink", referencedColumnName="id")
 	private Set<Node> backlinks = new HashSet<Node>();
 	
 	

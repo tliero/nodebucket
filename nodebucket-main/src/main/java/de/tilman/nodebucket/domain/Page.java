@@ -1,5 +1,8 @@
 package de.tilman.nodebucket.domain;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Page extends Node {
 	
 	private String content;

@@ -1,5 +1,8 @@
 package de.tilman.nodebucket.domain;
 
+import javax.persistence.Entity;
+
+@Entity
 public class File extends Node {
 	
 	private byte[] content;
