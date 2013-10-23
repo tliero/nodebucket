@@ -9,6 +9,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -19,9 +20,13 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
+import de.tilman.nodebucket.domain.User;
+import de.tilman.nodebucket.domain.UserGroup;
+import de.tilman.nodebucket.domain.UserGroupRepository;
+import de.tilman.nodebucket.domain.UserRepository;
 
 @Configuration
-//@EnableJpaRepositories
+@EnableJpaRepositories(basePackages= {"de.tilman.nodebucket.domain"})
 public class NodebucketMain {
 	
     @Bean
@@ -54,15 +59,44 @@ public class NodebucketMain {
 
 
 	public static void main(String[] args) {
-//		ApplicationContext context = new ClassPathXmlApplicationContext("nodebucket.xml");
-		
 		Logger root = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
 		root.setLevel(Level.INFO);
 		
         AbstractApplicationContext context = new AnnotationConfigApplicationContext(NodebucketMain.class);
         
+        UserRepository userRepository = context.getBean(UserRepository.class);
+        UserGroupRepository userGroupRepository = context.getBean(UserGroupRepository.class);
         
+        User achim = new User("Achim", "achim@siarp.de", "xxxxx", true);
+        User berta = new User("Berta", "berta@siarp.de", "xxxxx", false);
+        User carl = new User("Carl", "carl@siarp.de", "xxxxx", false);
+        User daniel = new User("Daniel", "daniel@siarp.de", "xxxxx", false);
         
+        userRepository.save(achim);
+        userRepository.save(berta);
+        userRepository.save(carl);
+        userRepository.save(daniel);
+
+        Iterable<User> users = userRepository.findAll();
+        System.out.println("Users found with findAll():");
+        System.out.println("---------------------------");
+        for (User user : users) {
+            System.out.println(user);
+        }
+        System.out.println();
+        
+        UserGroup userGroup = new UserGroup("Stammtisch", achim);
+        userGroup.addUser(achim);
+        userGroup.addUser(berta);
+        userGroup.addUser(carl);
+        userGroup.addUser(daniel);
+        userGroupRepository.save(userGroup);
+        
+        userGroup = userGroupRepository.findOne(1L);
+        System.out.println("UserGroup 1:");
+        System.out.println("------------");
+        System.out.println(userGroup);
+      
         context.close();
 	}
 
