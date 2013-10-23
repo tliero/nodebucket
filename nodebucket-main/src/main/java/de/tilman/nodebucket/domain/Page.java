@@ -7,6 +7,9 @@ public class Page extends Node {
 	
 	private String content;
 	
+	
+	protected Page() {}
+	
 	public Page(String title) {
 		super(title, MimeType.TEXT);
 	}

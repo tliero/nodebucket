@@ -4,11 +4,11 @@ import static org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType.
 
 import javax.sql.DataSource;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -16,6 +16,9 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
 
 @Configuration
 //@EnableJpaRepositories
@@ -52,6 +55,9 @@ public class NodebucketMain {
 
 	public static void main(String[] args) {
 //		ApplicationContext context = new ClassPathXmlApplicationContext("nodebucket.xml");
+		
+		Logger root = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+		root.setLevel(Level.INFO);
 		
         AbstractApplicationContext context = new AnnotationConfigApplicationContext(NodebucketMain.class);
         

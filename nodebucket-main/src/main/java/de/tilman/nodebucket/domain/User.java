@@ -12,6 +12,17 @@ public class User {
 	private String passwordHash;
 	private boolean superuser;
 	
+	
+	protected User() {}
+	
+	public User(String name, String email, String passwordHash, boolean superuser) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.passwordHash = passwordHash;
+		this.superuser = superuser;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -42,6 +53,11 @@ public class User {
 
 	public void setSuperuser(boolean superuser) {
 		this.superuser = superuser;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("User[name='%s', email='%s', superuser=%b]", name, email, superuser);
 	}
 
 }

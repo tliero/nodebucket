@@ -13,7 +13,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
-//@MappedSuperclass
+//@MappedSuperclass  // kollidiert mit one-to-many-Mapping für Backlinks
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class Node {
@@ -39,9 +39,10 @@ public abstract class Node {
     @Id
     @GeneratedValue(strategy=GenerationType.TABLE)
 	private long id;
-	private String title;
-	private MimeType mimeType;
-	private Visibility visibility;
+	
+    private String title;
+    private MimeType mimeType;
+ 	private Visibility visibility;
 	private HashSet<String> tags = new HashSet<String>();
 	
 	@OneToMany
@@ -49,6 +50,8 @@ public abstract class Node {
 	@JoinColumn(name="backlink", referencedColumnName="id")
 	private Set<Node> backlinks = new HashSet<Node>();
 	
+	
+	protected Node() {}
 	
 	public Node(String title, MimeType mimeType) {
 		this.id = 0; // TODO create unique ID
@@ -97,6 +100,12 @@ public abstract class Node {
 		backlinks.remove(node);
 	}
 	
+	
+	@Override
+	public String toString() {
+		return String.format("Node[id=%d, title='%s']", id, title);
+	}
+
 	public abstract Object getContent();
 
 }

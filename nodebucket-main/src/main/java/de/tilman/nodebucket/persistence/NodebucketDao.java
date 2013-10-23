@@ -1,7 +1,7 @@
 package de.tilman.nodebucket.persistence;
 
 import de.tilman.nodebucket.domain.File;
-import de.tilman.nodebucket.domain.Group;
+import de.tilman.nodebucket.domain.UserGroup;
 import de.tilman.nodebucket.domain.Node;
 import de.tilman.nodebucket.domain.Page;
 import de.tilman.nodebucket.domain.User;
@@ -29,13 +29,13 @@ public interface NodebucketDao {
 	public void saveFile(File file);
 	
 	
-	public Group getGroup(long id);
+	public UserGroup getGroup(long id);
 	
-	public Group getGroup(String name);
+	public UserGroup getGroup(String name);
 	
-	public void saveGroup(Group group);
+	public void saveGroup(UserGroup group);
 	
-	public void deleteGroup(Group group);
+	public void deleteGroup(UserGroup group);
 	
 	
 	public User getUser(String name);

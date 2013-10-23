@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 @Entity
 public class DynamicPage extends Node {
 	
+	protected DynamicPage() {}
+	
 	public DynamicPage(String title) {
 		super(title, MimeType.TEXT);
 	}

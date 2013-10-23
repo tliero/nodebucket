@@ -13,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Group {
+public class UserGroup {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -21,13 +21,21 @@ public class Group {
 	private String name;
 	
 	@OneToOne
-	@JoinColumn(name="adminName", referencedColumnName="name")
+	@JoinColumn(name="adminName")
 	private User groupAdmin;
 	
 	@ElementCollection
-	@CollectionTable(joinColumns={@JoinColumn(name="name")})
+	@CollectionTable(joinColumns={@JoinColumn(referencedColumnName="name", name="userName")})
 	private Set<User> users = new HashSet<User>();
 
+	
+	protected UserGroup() {}
+	
+	public UserGroup(String name, User groupAdmin) {
+		super();
+		this.name = name;
+		this.groupAdmin = groupAdmin;
+	}
 	
 	
 	public long getId() {
@@ -56,5 +64,10 @@ public class Group {
 
 	public void removeUser(User user) {
 		users.remove(user);
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("User[name='%s', admin='%s']", name, groupAdmin.getName());
 	}
 }

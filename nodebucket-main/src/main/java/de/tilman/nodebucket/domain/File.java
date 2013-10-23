@@ -7,6 +7,8 @@ public class File extends Node {
 	
 	private byte[] content;
 	
+	protected File() {}
+	
 	public File(String title) {
 		super(title, MimeType.FILE);
 	}
