@@ -22,5 +22,5 @@ public class Page extends Node {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
+	
 }

@@ -45,7 +45,7 @@ public abstract class Node {
  	private Visibility visibility;
 	private HashSet<String> tags = new HashSet<String>();
 	
-	@OneToMany
+//	@OneToMany
 	@ElementCollection
 	@JoinColumn(referencedColumnName="id", name="backlink")
 	private Set<Node> backlinks = new HashSet<Node>();
