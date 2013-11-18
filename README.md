@@ -1,2 +1,5 @@
 nodebucket
 ==========
+
+nodebucket loves microdata
+--------------------------
