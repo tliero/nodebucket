@@ -30,7 +30,7 @@ import de.tilman.nodebucket.domain.UserRepository;
 
 @Configuration
 @EnableJpaRepositories(basePackages = { "de.tilman.nodebucket.domain" })
-public class NodebucketMain {
+public class Nodebucket {
 
 	@Bean
 	public DataSource dataSource() {
@@ -64,7 +64,7 @@ public class NodebucketMain {
 		Logger root = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
 		root.setLevel(Level.INFO);
 
-		AbstractApplicationContext context = new AnnotationConfigApplicationContext(NodebucketMain.class);
+		AbstractApplicationContext context = new AnnotationConfigApplicationContext(Nodebucket.class);
 
 		UserRepository userRepository = context.getBean(UserRepository.class);
 		UserGroupRepository userGroupRepository = context.getBean(UserGroupRepository.class);
